@@ -27,6 +27,8 @@ public class World {
 //                case "r":
 //                    System.out.println("Zwierzak skręca w prawo");
 //                    break;
+//                default:
+//                    System.out.println("Zwierzak skręca w prawo");
 //            }
 //        }
 //    }
