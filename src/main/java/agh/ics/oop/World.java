@@ -34,8 +34,10 @@ public class World {
 //    }
 
     public static void run(Direction[] directions){
-        for (Direction direction : directions){
-            switch(direction){
+        for (int i = 0;  i< directions.length; i++){
+            if(directions[i] == null)
+                continue;
+            switch(directions[i]){
                 case FORWARD:
                     System.out.println("Zwierzak idzie do przodu");
                     break;
@@ -75,9 +77,15 @@ public class World {
     }
 
     public static void main(String[] args){
-        System.out.println("Start");
-        run(processInput(args));
+//        System.out.println("Start");
+//        run(processInput(args));
+//        System.out.println("Stop");
+        Vector2D pos1 = new Vector2D(1, 2);
+        System.out.println(pos1);
+        Vector2D pos2 = new Vector2D(-2, 1);
+        System.out.println(pos2);
+        System.out.println(pos1.add(pos2));
 
-        System.out.println("Stop");
+
     }
 }
