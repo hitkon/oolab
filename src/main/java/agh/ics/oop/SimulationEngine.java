@@ -27,9 +27,9 @@ public class SimulationEngine implements IEngine{
         for (int i = 0; i < args.length; i++){
             animals[i%numberOfAnimals].move(args[i]);
         }
-        MapVisualizer vis =new MapVisualizer(map);
-
-        System.out.println(vis.draw(new Vector2d(0,0), new Vector2d(9,4)));
+//        MapVisualizer vis =new MapVisualizer(map);
+//
+//        System.out.println(vis.draw(new Vector2d(0,0), new Vector2d(9,4)));
         //return vis.draw(new Vector2d(0,0), new Vector2d(9,4));
 //        for(int i = 0; i < numberOfAnimals; i++){
 //            System.out.println(animals[i].toString());

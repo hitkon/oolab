@@ -2,43 +2,40 @@ package agh.ics.oop;
 
 import java.awt.image.IndexColorModel;
 
-public class Animal {
+public class Animal extends AbstractMapElement{
     private static Vector2d mapRightUpCorner = new Vector2d(4, 4);
     private static Vector2d mapLeftDownCorner = new Vector2d(0, 0);
     private IWorldMap map;
     private MapDirection animalDir;
-    private Vector2d animalPos;
+    //private Vector2d animalPos;
     private Animal(){
+        super(new Vector2d(2,2));
         animalDir = MapDirection.NORTH;
-        animalPos = new Vector2d(2,2);
+        //animalPos = new Vector2d(2,2);
     }
 
     public Animal(IWorldMap map){
+        super(new Vector2d(2,2));
         animalDir = MapDirection.NORTH;
-        animalPos = new Vector2d(2,2);
+        //animalPos = new Vector2d(2,2);
         this.map = map;
         map.place(this);
     }
 
     public Animal(IWorldMap map, Vector2d initialPos){
+        super(initialPos);
         animalDir = MapDirection.NORTH;
-        animalPos = initialPos;
+        //animalPos = initialPos;
         this.map = map;
         map.place(this);
     }
 
     public boolean isAt(Vector2d position){
-        return animalPos.equals(position);
+        return getPosition().equals(position);
     }
 
-    private void correctPositiob(){
-        animalPos = mapRightUpCorner.lowerLeft(animalPos);
-        animalPos = mapLeftDownCorner.upperRight(animalPos);
-    }
-
-    public Vector2d getAnimalPos() {
-        return animalPos;
-    }
+//    @Override
+//    public Vector2d getPosition(){return animalPos;}
 
     public void move(MoveDirection dir){
         switch(dir){
@@ -46,12 +43,12 @@ public class Animal {
             case RIGHT -> animalDir = animalDir.next();
             case FORWARD -> {
                 map.remove(this);
-                animalPos = map.canMoveTo(animalPos.add(animalDir.toUnitVector())) ? animalPos.add(animalDir.toUnitVector()) : animalPos;
+                setPosition(map.canMoveTo(getPosition().add(animalDir.toUnitVector())) ? getPosition().add(animalDir.toUnitVector()) : getPosition());
                 map.place(this);
             }
             case BACKWARD -> {
                 map.remove(this);
-                animalPos = map.canMoveTo(animalPos.add(animalDir.toUnitVector().opposite())) ? animalPos.add(animalDir.toUnitVector().opposite()) : animalPos;
+                setPosition(map.canMoveTo(getPosition().add(animalDir.toUnitVector().opposite())) ? getPosition().add(animalDir.toUnitVector().opposite()) : getPosition());
                 map.place(this);
             }
         }

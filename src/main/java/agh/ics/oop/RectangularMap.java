@@ -2,7 +2,7 @@ package agh.ics.oop;
 
 import java.util.List;
 
-public class RectangularMap implements IWorldMap{
+public class RectangularMap extends AbstractWorldMap implements IWorldMap {
 
     private int width, height;
     private Object[][] map;
@@ -20,15 +20,15 @@ public class RectangularMap implements IWorldMap{
 
     @Override
     public boolean place(Animal animal) {
-        if(!isOccupied(animal.getAnimalPos())){
-            map[animal.getAnimalPos().x][animal.getAnimalPos().y] = animal;
+        if(!isOccupied(animal.getPosition())){
+            map[animal.getPosition().x][animal.getPosition().y] = animal;
             return true;
         }
         return false;
     }
     @Override
     public void remove(Animal animal){
-        map[animal.getAnimalPos().x][animal.getAnimalPos().y] = null;
+        map[animal.getPosition().x][animal.getPosition().y] = null;
     }
 
     @Override
@@ -39,5 +39,13 @@ public class RectangularMap implements IWorldMap{
     @Override
     public Object objectAt(Vector2d position) {
         return map[position.x][position.y];
+    }
+
+    public Vector2d getLeftDownCorner(){
+        return new Vector2d(0,0);
+    }
+
+    public Vector2d getRightUpCorner(){
+        return new Vector2d(width-1, height-1);
     }
 }
