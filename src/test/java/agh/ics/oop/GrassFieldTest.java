@@ -9,7 +9,7 @@ public class GrassFieldTest {
     public void GrassFieldTest1(){
         String[] args = new String[]{"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f", "f"};
         MoveDirection[] directions = new OptionsParser().parse(args);
-        IWorldMap map = new GrassField(10);
+        AbstractWorldMap map = new GrassField(10);
         Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
         IEngine engine = new SimulationEngine(directions, map, positions);
         System.out.println(map);
@@ -27,7 +27,7 @@ public class GrassFieldTest {
     public void GrassFieldTest2(){
         String[] args = new String[]{"f", "f"};
         MoveDirection[] directions = new OptionsParser().parse(args);
-        IWorldMap map = new GrassField(10);
+        AbstractWorldMap map = new GrassField(10);
         Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
         IEngine engine = new SimulationEngine(directions, map, positions);
 

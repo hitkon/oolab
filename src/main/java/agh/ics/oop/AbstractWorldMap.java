@@ -1,6 +1,6 @@
 package agh.ics.oop;
 
-public abstract class AbstractWorldMap implements IWorldMap {
+public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver{
 
     public abstract Vector2d getLeftDownCorner();
 
@@ -36,5 +36,13 @@ public abstract class AbstractWorldMap implements IWorldMap {
     @Override
     public void remove(Animal animal) {
 
+    }
+
+    @Override
+    public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
+        Animal animal = (Animal)objectAt(oldPosition);
+        remove(animal);
+        animal.setPosition(newPosition);
+        place(animal);
     }
 }

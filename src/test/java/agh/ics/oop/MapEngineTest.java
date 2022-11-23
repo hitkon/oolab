@@ -8,9 +8,10 @@ public class MapEngineTest {
     public void EngineTest1(){
         String[] args = new String[]{"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f", "f"};
         MoveDirection[] directions = new OptionsParser().parse(args);
-        IWorldMap map = new RectangularMap(10, 5);
+        AbstractWorldMap map = new RectangularMap(10, 5);
         Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
         IEngine engine = new SimulationEngine(directions, map, positions);
+
         engine.run();
         Animal[] animals = engine.getAnimals();
         System.out.println(map);
@@ -23,7 +24,7 @@ public class MapEngineTest {
     public void EngineTes2(){
         String[] args = new String[]{"f", "f"};
         MoveDirection[] directions = new OptionsParser().parse(args);
-        IWorldMap map = new RectangularMap(10, 5);
+        AbstractWorldMap map = new RectangularMap(10, 5);
         Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
         IEngine engine = new SimulationEngine(directions, map, positions);
         engine.run();
