@@ -6,6 +6,7 @@ public class GrassField extends AbstractWorldMap implements IWorldMap{
 
     //private List<IMapElement> Objects;
     private Map<Vector2d, IMapElement> Objects;
+
     private int grassSpawnLength;
 
     private Vector2d getRandomFreePlace(){
@@ -17,16 +18,26 @@ public class GrassField extends AbstractWorldMap implements IWorldMap{
         while (this.isOccupied(res));
         return res;
     }
+    public void setBounds(MapBoundary bounds){
+        this.bounds = bounds;
+        this.bounds.setMap(Objects);
+    }
+
+    public MapBoundary getBounds(){
+        return bounds;
+    }
 
     public GrassField(int n){
-        //Objects = new ArrayList<>();
         Objects = new HashMap<>();
+        setBounds(new MapBoundary());
+
         grassSpawnLength = (int)(Math.sqrt(n * 10));
-        Objects.put(new Vector2d(3,5 ), new Grass(new Vector2d(3, 5)));
+        Objects.put(new Vector2d(2,3 ), new Grass(new Vector2d(2, 3)));
         for (int i = 0; i < n-1; i++){
             Vector2d newGrassPosition = getRandomFreePlace();
             Objects.put(newGrassPosition, new Grass(newGrassPosition));
         }
+        bounds.forceUpdate();
     }
 
     @Override
@@ -40,18 +51,19 @@ public class GrassField extends AbstractWorldMap implements IWorldMap{
         if(canMoveTo(animal.getPosition())){
             if(isOccupied((animal.getPosition()))){
                 Objects.remove(objectAt(animal.getPosition()));
+                bounds.remove(animal.getPosition());
                 Vector2d newGrassPosition = getRandomFreePlace();
+                bounds.add(newGrassPosition);
                 Objects.put(newGrassPosition, new Grass(newGrassPosition));
             }
             Objects.put(animal.getPosition(), animal);
             return true;
         }
-        return false;
+        throw new IllegalArgumentException(animal.getPosition() + " can't place on position");
     }
 
     @Override
     public boolean isOccupied(Vector2d position) {
-        //Object obj = objectAt(position);
         return objectAt(position) != null;
     }
 
@@ -66,18 +78,20 @@ public class GrassField extends AbstractWorldMap implements IWorldMap{
     }
 
     public Vector2d getLeftDownCorner(){
-        Vector2d leftDown = new Vector2d(0, 0);
-        for(IMapElement Obj : Objects.values()){
-            leftDown = Obj.getPosition().lowerLeft(leftDown);
-        }
-        return leftDown;
+        return bounds.getLeftDown();
+//        Vector2d leftDown = new Vector2d(0, 0);
+//        for(IMapElement Obj : Objects.values()){
+//            leftDown = Obj.getPosition().lowerLeft(leftDown);
+//        }
+//        return leftDown;
     }
 
     public Vector2d getRightUpCorner(){
-        Vector2d rightUp = new Vector2d(grassSpawnLength-1, grassSpawnLength-1);
-        for(IMapElement Obj : Objects.values()){
-            rightUp = Obj.getPosition().upperRight(rightUp);
-        }
-        return  rightUp;
+        return bounds.getRightUp();
+//        Vector2d rightUp = new Vector2d(grassSpawnLength-1, grassSpawnLength-1);
+//        for(IMapElement Obj : Objects.values()){
+//            rightUp = Obj.getPosition().upperRight(rightUp);
+//        }
+//        return  rightUp;
     }
 }

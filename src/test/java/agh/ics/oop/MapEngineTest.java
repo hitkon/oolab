@@ -40,10 +40,27 @@ public class MapEngineTest {
         Assertions.assertEquals(animals[0].toString(), "N");
         Assertions.assertEquals(animals[1].toString(), "N");
     }
-//    @Test
-//    public void RectangularMapTest(){
-//        IWorldMap map = new RectangularMap(5, 5);
-//        Animal cat = new Animal()
-//    }
+    @Test
+    public void PlaceAnimalExceptionTest(){
+        String[] args = new String[]{"f", "f"};
+        MoveDirection[] directions = new OptionsParser().parse(args);
+        AbstractWorldMap map = new RectangularMap(10, 5);
+        Vector2d[] positions = {new Vector2d(2, 2), new Vector2d(2, 2)};
+        IEngine engine = new SimulationEngine(directions, map, positions);
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> {engine.run();}
+        );
+    }
+
+    @Test
+    public void OptionParserExceptionTest(){
+        String[] args = new String[]{"f", "k"};
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> {new OptionsParser().parse(args);}
+        );
+
+    }
 
 }

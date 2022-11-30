@@ -2,8 +2,12 @@ package agh.ics.oop;
 
 public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver{
 
+    protected MapBoundary bounds;
+
     public abstract Vector2d getLeftDownCorner();
 
+    public abstract void setBounds(MapBoundary bounds);
+    public abstract MapBoundary getBounds();
 
 
     public abstract Vector2d getRightUpCorner();

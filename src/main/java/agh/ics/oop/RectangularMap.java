@@ -10,6 +10,7 @@ public class RectangularMap extends AbstractWorldMap implements IWorldMap {
     public RectangularMap(int width, int height){
         this.width = width;
         this.height = height;
+        setBounds(new MapBoundary());
         map = new Object[width][height];
     }
 
@@ -24,7 +25,7 @@ public class RectangularMap extends AbstractWorldMap implements IWorldMap {
             map[animal.getPosition().x][animal.getPosition().y] = animal;
             return true;
         }
-        return false;
+        throw new IllegalArgumentException(animal.getPosition() + " can't place on position");
     }
     @Override
     public void remove(Animal animal){
@@ -43,6 +44,16 @@ public class RectangularMap extends AbstractWorldMap implements IWorldMap {
 
     public Vector2d getLeftDownCorner(){
         return new Vector2d(0,0);
+    }
+
+    @Override
+    public void setBounds(MapBoundary bounds) {
+        this.bounds = bounds;
+    }
+
+    @Override
+    public MapBoundary getBounds() {
+        return bounds;
     }
 
     public Vector2d getRightUpCorner(){

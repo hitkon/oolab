@@ -1,5 +1,8 @@
 package agh.ics.oop;
 
+import agh.ics.oop.gui.App;
+import javafx.application.Application;
+
 public class World {
 //    public static void run(Direction[] directions){
 //        for (int i = 0;  i< directions.length; i++){
@@ -50,10 +53,19 @@ public class World {
 //        Vector2d pos2 = new Vector2d(-2, 1);
 //        System.out.println(pos2);
 //        System.out.println(pos1.add(pos2));
-        MoveDirection[] directions = new OptionsParser().parse(args);
-        AbstractWorldMap map = new RectangularMap(10, 5);
-        Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
-        IEngine engine = new SimulationEngine(directions, map, positions);
-        engine.run();
+
+        Application.launch(App.class, args);
+
+//        try {
+//            MoveDirection[] directions = new OptionsParser().parse(args);
+//            AbstractWorldMap map = new RectangularMap(10, 5);
+//            Vector2d[] positions = {new Vector2d(2, 2), new Vector2d(2, 2)};
+//            IEngine engine = new SimulationEngine(directions, map, positions);
+//            engine.run();
+//            System.out.println(map);
+//        }
+//        catch (Exception e){
+//            System.out.println(e);
+//        }
     }
 }
