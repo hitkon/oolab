@@ -7,7 +7,18 @@ public class Grass extends AbstractMapElement{
     {
         super(pos);
     }
-//    @Override
+
+    @Override
+    public String getImage() {
+        return "src/main/java/resources/grass.png";
+    }
+
+    @Override
+    public String getLabelText() {
+        return "Grass";
+    }
+
+    //    @Override
 //    public Vector2d getPosition(){
 //        return position;
 //    }

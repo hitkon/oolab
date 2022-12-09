@@ -67,4 +67,27 @@ public class Animal extends AbstractMapElement{
         return animalDir.toString();
     }
 
+    @Override
+    public String getImage() {
+        switch (this.animalDir){
+            case EAST -> {
+                return "src/main/java/resources/right.png";
+            }
+            case WEST -> {
+                return "src/main/java/resources/left.png";
+            }
+            case NORTH -> {
+                return "src/main/java/resources/up.png";
+            }
+            case SOUTH -> {
+                return "src/main/java/resources/down.png";
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public String getLabelText() {
+        return "A" + this.getPosition().toString();
+    }
 }
